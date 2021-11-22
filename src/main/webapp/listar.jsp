@@ -20,7 +20,7 @@
         List<Productos> listadoProductos = (List<Productos>) request.getAttribute("listado");
     %>
     <body>
-        <h1>Lisado de productos</h1>
+        <h1>Lisado de productos por nombre</h1>
         <table class="table">
             <% for (Productos listadoProducto : listadoProductos) { %>
             <tr>
