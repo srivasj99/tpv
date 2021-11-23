@@ -3,7 +3,10 @@
     Created on : 22-nov-2021, 17:41:38
     Author     : DAW-A
 --%>
-
+<%
+    String mensaje = (String) request.getAttribute("mensaje");
+    String operacion = (String) request.getAttribute("operacion");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +16,7 @@
     </head>
     <body>
         <h1>Producto</h1>
-        <form action="Servlet?op=actualizarDatos" method="post">
+        <form action="Servlet?op=<%=operacion%>" method="post">
             <p>ID: <input type="text" value="${producto.id}" name="id" readonly></p>
             <p>Nombre: <input type="text" value="${producto.nombre}" name="nombre"></p>
             <p>Categoria: <input type="text" value="${producto.categoria}" name="categoria"></p>

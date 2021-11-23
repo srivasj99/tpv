@@ -45,6 +45,7 @@
                 </tr>
                 <%}%>
             </table>
+            <a href="Servlet?op=insertar" class="btn btn-primary">Insertar</a>
         </div>
             <script>
                 function Confirmation(){

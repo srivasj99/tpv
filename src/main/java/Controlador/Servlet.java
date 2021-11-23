@@ -52,6 +52,7 @@ public class Servlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Productos miProducto = ProductosCRUD.getProducto(id);
             request.setAttribute("producto", miProducto);
+            request.setAttribute("operacion", "actualizarDatos");
             request.getRequestDispatcher("actualizar.jsp").forward(request, response);
         }else if(op.equals("actualizarDatos")){
             int id = Integer.parseInt(request.getParameter("id"));
@@ -64,6 +65,21 @@ public class Servlet extends HttpServlet {
             }else{
                 request.setAttribute("mensaje", "No se ha actualizado ningún producto");
             }
+            List<Productos> listaProductos = ProductosCRUD.getProductos();
+            request.setAttribute("listado", listaProductos);
+            request.getRequestDispatcher("listar.jsp").forward(request, response);
+        }else if(op.equals("insertar")){
+            request.setAttribute("operacion", "insertarDatos");
+            request.setAttribute("mensaje", "");
+            request.getRequestDispatcher("actualizar.jsp").forward(request, response);
+        }
+        else if(op.equals("insertarDatos")){
+            String nombre = request.getParameter("nombre");
+            String categoria = request.getParameter("categoria");
+            String imagen = "imagen.jpg";
+            float precio = Float.parseFloat(request.getParameter("precio"));
+            Productos miProducto = new Productos(nombre, imagen, categoria, precio);
+            ProductosCRUD.insertaProducto(miProducto);
             List<Productos> listaProductos = ProductosCRUD.getProductos();
             request.setAttribute("listado", listaProductos);
             request.getRequestDispatcher("listar.jsp").forward(request, response);
