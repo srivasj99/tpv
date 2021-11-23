@@ -16,26 +16,45 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         
     </head>
-    <%
-        List<Productos> listadoProductos = (List<Productos>) request.getAttribute("listado");
-    %>
+    
     <body>
+        <%
+        List<Productos> listadoProductos = (List<Productos>) request.getAttribute("listado");
+        String mensaje = (String) request.getAttribute("mensaje");
+        
+        %>
+        <div class="container">
         <h1>Lisado de productos por nombre</h1>
-        <table class="table">
-            <% for (Productos listadoProducto : listadoProductos) { %>
-            <tr>
-                <td>
-                    <%= listadoProducto.getNombre() %>
-                </td>
-                <td>
-                    <%= listadoProducto.getCategoria() %>
-                </td>
-                <td>
-                    <%= listadoProducto.getPrecio()%>
-                </td>
-                <td><a href="Servlet?op=borrar&id=<%= listadoProducto.getId() %>">Borrar</a></td>
-            </tr>
-            <%}%>
-        </table>
+        <%if(mensaje != null){%>
+        <h2 class="alert alert-success"><%=mensaje%></h2>
+        <%}%>
+            <table class="table">
+                <% for (Productos listadoProducto : listadoProductos) { %>
+                <tr>
+                    <td>
+                        <%= listadoProducto.getNombre() %>
+                    </td>
+                    <td>
+                        <%= listadoProducto.getCategoria() %>
+                    </td>
+                    <td>
+                        <%= listadoProducto.getPrecio()%>
+                    </td>
+                    <td><a href="Servlet?op=borrar&id=<%= listadoProducto.getId() %>" onclick="return Confirmation()">Borrar</a></td>
+                    <td><a href="Servlet?op=actualizar&id=<%= listadoProducto.getId() %>">Actualizar</a></td>
+                </tr>
+                <%}%>
+            </table>
+        </div>
+            <script>
+                function Confirmation(){
+                    if(confirm("Esta seguro de eliminar el registro?") == true){
+                        alert("El registro ha sido eliminado correctamente!!!");
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            </script>
     </body>
 </html>
